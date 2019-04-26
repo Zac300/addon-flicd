@@ -1,0 +1,23 @@
+#!/usr/bin/with-contenv bashio
+# ==============================================================================
+# Hass.io Add-ons: flicd
+# Runs the flicd server
+# ==============================================================================
+declare -a options
+
+bashio::log.info 'Starting the flicd server...'
+
+# Database file
+options+=(-f "/var/flicd-db")
+
+# Allow only local connections
+options+=(-s "127.0.0.1")
+
+# Open specific port
+options+=(-p "5551")
+
+# Wait for bluetooth device
+options+=(-w)
+
+# Run the flicd server
+exec flicd "${options[@]}"
